@@ -1,0 +1,47 @@
+name = "crossword-battle"
+main = "src/index.ts"
+compatibility_date = "2025-05-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Keep the *.workers.dev URL enabled as a stable test/fallback URL (otherwise each
+# deploy disables it). Disable at final launch if the app should be custom-domain only.
+workers_dev = true
+
+# --- Custom domain. Point this at a zone in YOUR Cloudflare account, or delete the
+# routes block to deploy on *.workers.dev only. wrangler provisions the placeholder
+# DNS record + edge cert on deploy. A new custom hostname can return error 1016 for a
+# while (edge routing provisioning lag) even when the record/cert look correct — it
+# clears on its own; don't churn it. ---
+routes = [
+  { pattern = "crossword.example.com", custom_domain = true },
+]
+
+# --- Durable Objects ---
+[[durable_objects.bindings]]
+name = "SESSION"
+class_name = "SessionDO"
+
+# SQLite-backed DO (one session per join code).
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["SessionDO"]
+
+# --- D1 ---
+# Remote D1. Local Vitest/Miniflare uses its own in-memory D1, so this id only matters
+# for `--remote` and the deployed Worker. Create your own database and paste its id:
+#   npx wrangler d1 create crossword-battle
+[[d1_databases]]
+binding = "DB"
+database_name = "crossword-battle"
+database_id = "<YOUR_D1_DATABASE_ID>"
+
+# --- Static Assets (Vite SPA built to apps/web/dist) ---
+[assets]
+directory = "../web/dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = ["/api/*", "/ws/*"]
+
+# --- Public (non-secret) vars. Secrets come from .dev.vars / wrangler secret. ---
+[vars]
+AI_MODEL = "google/gemini-3.1-flash-lite"

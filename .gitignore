@@ -1,0 +1,43 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build output
+dist/
+build/
+*.tsbuildinfo
+
+# Cloudflare / Wrangler
+.wrangler/
+.mf/
+# local wrangler config carries real resource IDs — copy from apps/worker/wrangler.toml.example
+apps/worker/wrangler.toml
+
+# secrets — NEVER COMMIT
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+*.local
+
+# test artifacts
+coverage/
+playwright-report/
+test-results/
+.playwright/
+
+# editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.log
+
+docs/superpowers/
+# playwright-cli artifacts
+.playwright-cli/
+.claude/
+.agents/
+.ui-review/
+# impeccable per-run critique snapshots (process artifacts; design.json/live config stay tracked)
+.impeccable/critique/
+skills-lock.json

@@ -1,0 +1,17 @@
+{
+  "name": "crossword-battle",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "build": "pnpm --filter @cwb/web build && pnpm --filter @cwb/worker typecheck",
+    "dev:web": "pnpm --filter @cwb/web dev",
+    "dev:worker": "pnpm --filter @cwb/worker dev",
+    "e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.60.0"
+  }
+}

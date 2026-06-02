@@ -1,0 +1,24 @@
+{
+  "name": "@cwb/worker",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "e2e:protocol": "node scripts/protocol-e2e.mjs"
+  },
+  "dependencies": {
+    "@cwb/engine": "workspace:*",
+    "@cwb/shared": "workspace:*",
+    "hono": "^4.6.13"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "^0.16.10",
+    "@cloudflare/workers-types": "^4.20260529.1",
+    "typescript": "^5.7.2",
+    "vitest": "^4.1.7",
+    "wrangler": "^4.95.0"
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-30",
+  "title": "Design System: Crossword Battle",
+  "extensions": {
+    "colorMeta": {
+      "coral": {
+        "role": "primary",
+        "displayName": "Spotlight Coral",
+        "canonical": "#FE414D",
+        "tonalRamp": ["#330A0D", "#5E1116", "#8C1A21", "#C4242F", "#FE414D", "#FF727B", "#FFA6AC", "#FFE0E2"]
+      },
+      "coral-ink": { "role": "primary", "displayName": "Coral Ink", "canonical": "#C4242F" },
+      "coral-tint": { "role": "primary", "displayName": "Coral Tint (10%)", "canonical": "rgba(254,65,77,0.10)" },
+      "coral-line": { "role": "primary", "displayName": "Coral Line (45%)", "canonical": "rgba(254,65,77,0.45)" },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#1F1B19",
+        "tonalRamp": ["#0C0A09", "#181513", "#1F1B19", "#332D29", "#5A5550", "#8C867E", "#BDB8B0", "#EFEBDF"]
+      },
+      "grey": { "role": "neutral", "displayName": "Grey", "canonical": "#5A5550" },
+      "grey-soft": { "role": "neutral", "displayName": "Grey Soft", "canonical": "#8C867E" },
+      "cream": {
+        "role": "neutral",
+        "displayName": "Press Cream",
+        "canonical": "#F5F2EA",
+        "tonalRamp": ["#1F1B19", "#5A5550", "#8C867E", "#BDB8B0", "#EFEBDF", "#F5F2EA", "#FBF9F2", "#FFFFFF"]
+      },
+      "paper": { "role": "neutral", "displayName": "Paper", "canonical": "#FBF9F2" },
+      "paper-edge": { "role": "neutral", "displayName": "Paper Edge", "canonical": "#EFEBDF" },
+      "night": { "role": "neutral", "displayName": "Night", "canonical": "#181513" },
+      "night-2": { "role": "neutral", "displayName": "Night 2", "canonical": "#221E1B" },
+      "inword-highlight": { "role": "tertiary", "displayName": "Inword Highlight", "canonical": "#FBE9D2" },
+      "line": { "role": "neutral", "displayName": "Hairline (12%)", "canonical": "rgba(31,27,25,0.12)" },
+      "line-2": { "role": "neutral", "displayName": "Hairline 2 (20%)", "canonical": "rgba(31,27,25,0.20)" },
+      "line-3": { "role": "neutral", "displayName": "Hairline 3 (42%)", "canonical": "rgba(31,27,25,0.42)" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero titles, winner name, player rank. Space Grotesk 700, tight tracking. Countdown digit is a 200-420px special case." },
+      "headline": { "displayName": "Headline", "purpose": "Screen H1s and stat values." },
+      "title": { "displayName": "Title", "purpose": "Card headings, player names, section titles." },
+      "body": { "displayName": "Body", "purpose": "Prose and supporting copy in Grey, capped 65-75ch. Inter." },
+      "label": { "displayName": "Label / Mono", "purpose": "Eyebrows, timers, join codes, status. JetBrains Mono, UPPERCASE, 0.14em." }
+    },
+    "shadows": [
+      { "name": "focus-ring", "value": "0 0 0 3px rgba(254,65,77,0.10)", "purpose": "The one deliberate glow — input while focused, paired with a coral border. State-driven only." },
+      { "name": "toggle-knob", "value": "0 1px 3px rgba(0,0,0,0.25)", "purpose": "Hairline lift on the switch handle so it reads as physical." }
+    ],
+    "motion": [
+      { "name": "ease-stage", "value": "cubic-bezier(0.2, 0.7, 0.2, 1)", "purpose": "The house easing for entrances and bar fills — fast out, soft settle. No bounce, no elastic." },
+      { "name": "riseIn", "value": "translateY(12px) -> none, 0.45s", "purpose": "Default entrance. Transform-only so content is never invisible if a timeline is throttled." },
+      { "name": "popIn", "value": "scale(0.94) -> none, 0.4s", "purpose": "Entrance for player rows, cards, the countdown digit. Transform-only." },
+      { "name": "stagger", "value": "~70ms per child (.d1-.d5 = 50/120/190/260/330ms)", "purpose": "Sequence children of a revealed list." },
+      { "name": "instant-selection", "value": "no transition", "purpose": "Selection-state backgrounds (active cell, selected pill/tab) change instantly — transitions stick mid-state in throttled webviews." }
+    ],
+    "breakpoints": [
+      { "name": "phone", "value": "<=430px (primary player + organizer surface, thumb-driven, 100dvh shell)" },
+      { "name": "display", "value": "16:9 booth/room screen, read at distance, nothing critical below ~14px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single most important action on a screen. One coral button per view.",
+      "html": "<button class=\"ds-btn-primary\">Create New Session →</button>",
+      "css": ".ds-btn-primary { font-family: var(--head, 'Space Grotesk'), sans-serif; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: #fff; background: var(--coral, #FE414D); border: none; border-radius: var(--r-md, 12px); padding: 16px 22px; cursor: pointer; transition: transform .12s ease, background .15s ease; } .ds-btn-primary:hover { background: #EC3743; } .ds-btn-primary:active { transform: scale(0.985); }"
+    },
+    {
+      "name": "Dark Button",
+      "kind": "button",
+      "refersTo": "button-dark",
+      "description": "Terminal or destructive actions (End Round). Ink fill, cream text.",
+      "html": "<button class=\"ds-btn-dark\">End Round</button>",
+      "css": ".ds-btn-dark { font-family: var(--head, 'Space Grotesk'), sans-serif; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--cream, #F5F2EA); background: var(--ink, #1F1B19); border: none; border-radius: var(--r-md, 12px); padding: 16px 22px; cursor: pointer; transition: transform .12s ease, background .15s ease; } .ds-btn-dark:hover { background: #322C28; } .ds-btn-dark:active { transform: scale(0.985); }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary / tertiary actions. Hairline inset border, no fill.",
+      "html": "<button class=\"ds-btn-ghost\">Resume Last Session</button>",
+      "css": ".ds-btn-ghost { font-family: var(--head, 'Space Grotesk'), sans-serif; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; color: var(--ink, #1F1B19); background: transparent; border: none; border-radius: var(--r-md, 12px); padding: 16px 22px; cursor: pointer; box-shadow: inset 0 0 0 1.5px rgba(31,27,25,0.42); transition: box-shadow .15s ease, background .15s ease; } .ds-btn-ghost:hover { box-shadow: inset 0 0 0 1.5px var(--ink, #1F1B19); background: rgba(31,27,25,0.03); }"
+    },
+    {
+      "name": "Live / AI Chip",
+      "kind": "chip",
+      "refersTo": "chip-coral-soft",
+      "description": "Soft coral pill for live and AI states. A pulsing dot precedes the label.",
+      "html": "<span class=\"ds-chip-soft\"><span class=\"ds-dot\"></span>LOBBY OPEN</span>",
+      "css": ".ds-chip-soft { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono, 'JetBrains Mono'), monospace; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--coral-ink, #C4242F); background: var(--coral-tint, rgba(254,65,77,0.10)); box-shadow: inset 0 0 0 1px var(--coral-line, rgba(254,65,77,0.45)); border-radius: 100px; padding: 5px 10px; } .ds-dot { width: 7px; height: 7px; border-radius: 100px; background: currentColor; animation: dsPulse 1.6s ease-in-out infinite; } @keyframes dsPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }"
+    },
+    {
+      "name": "Input Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Name entry, puzzle fields. Coral focus ring is the only glow in the system.",
+      "html": "<input class=\"ds-field\" placeholder=\"Your name\" />",
+      "css": ".ds-field { font-family: var(--head, 'Space Grotesk'), sans-serif; font-weight: 600; font-size: 22px; color: var(--ink, #1F1B19); background: var(--paper, #FBF9F2); border: 1.5px solid rgba(31,27,25,0.20); border-radius: var(--r-md, 12px); padding: 18px; width: 100%; outline: none; transition: border-color .15s ease, box-shadow .15s ease; } .ds-field::placeholder { color: var(--grey-soft, #8C867E); font-weight: 500; } .ds-field:focus { border-color: var(--coral, #FE414D); box-shadow: 0 0 0 3px var(--coral-tint, rgba(254,65,77,0.10)); }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Paper surface with a hairline border. Flat by default; no resting shadow. Never nested.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-label\">COMPLETION TIME</div><div class=\"ds-card-val\">01:24</div></div>",
+      "css": ".ds-card { background: var(--paper, #FBF9F2); border: 1px solid rgba(31,27,25,0.12); border-radius: var(--r-lg, 18px); padding: 18px; } .ds-card-label { font-family: var(--mono, 'JetBrains Mono'), monospace; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.14em; color: var(--grey-soft, #8C867E); } .ds-card-val { font-family: var(--mono, 'JetBrains Mono'), monospace; font-variant-numeric: tabular-nums; font-size: 30px; color: var(--coral, #FE414D); margin-top: 4px; }"
+    },
+    {
+      "name": "Leaderboard Row",
+      "kind": "custom",
+      "refersTo": "lb-row",
+      "description": "Rank / name / time, hairline-divided. The leader row's rank turns coral.",
+      "html": "<div class=\"ds-lb ds-lead\"><span class=\"ds-lb-rank\">1</span><span class=\"ds-lb-name\">Priya</span><span class=\"ds-lb-time\">01:18</span></div>",
+      "css": ".ds-lb { display: grid; grid-template-columns: 30px 1fr auto; align-items: center; gap: 12px; padding: 13px 4px; border-bottom: 1px solid rgba(31,27,25,0.12); } .ds-lb-rank { font-family: var(--mono, 'JetBrains Mono'), monospace; font-size: 14px; font-variant-numeric: tabular-nums; color: var(--grey-soft, #8C867E); } .ds-lead .ds-lb-rank { color: var(--coral, #FE414D); } .ds-lb-name { font-family: var(--head, 'Space Grotesk'), sans-serif; font-weight: 600; font-size: 16px; color: var(--ink, #1F1B19); } .ds-lb-time { font-family: var(--mono, 'JetBrains Mono'), monospace; font-size: 14px; font-variant-numeric: tabular-nums; color: var(--grey, #5A5550); }"
+    },
+    {
+      "name": "Crossword Cells",
+      "kind": "custom",
+      "refersTo": "crossword-cell-active",
+      "description": "Signature grid. Active cell is Spotlight Coral; the current word path is the warm Inword Highlight. Selection backgrounds change with NO transition.",
+      "html": "<div class=\"ds-xw\"><div class=\"ds-cell\"><span class=\"ds-cell-num\">1</span>C</div><div class=\"ds-cell ds-inword\">A</div><div class=\"ds-cell ds-active\">T</div></div>",
+      "css": ".ds-xw { display: inline-grid; grid-auto-flow: column; gap: 2px; background: var(--ink, #1F1B19); padding: 2px; border-radius: 4px; } .ds-cell { position: relative; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: var(--paper, #FBF9F2); font-family: var(--head, 'Space Grotesk'), sans-serif; font-weight: 600; color: var(--ink, #1F1B19); } .ds-inword { background: #FBE9D2; } .ds-active { background: var(--coral, #FE414D); color: #fff; } .ds-cell-num { position: absolute; top: 2px; left: 3px; font-family: var(--mono, 'JetBrains Mono'), monospace; font-size: 9px; line-height: 1; color: var(--grey-soft, #8C867E); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Editorial Stage",
+    "overview": "Crossword Battle is Swiss editorial print that flips to a lit stage in the moments that earn it. At rest it is a press-cream broadsheet: warm paper, charcoal ink (never pure black), mono labels in small caps, hairline rules, generous restraint. Then the countdown drops to full-bleed dark, a single 260px coral digit pops on every tick, and the same calm system becomes a game show. The console is quiet so the reveals can be loud. The accent — Spotlight Coral — behaves like a stage light, not a brand fill: on any view it marks exactly one thing, and its rarity is the point. Depth never comes from shadows; it comes from a tonal paper ladder (cream background to paper cards to recessed paper-edge wells) and charcoal hairlines.",
+    "keyCharacteristics": [
+      "Press-cream paper + a single coral spotlight; ink, never black.",
+      "Three type voices with strict jobs: Space Grotesk titles, Inter prose, JetBrains Mono system text.",
+      "Flat by default; depth via tonal layering and hairlines, not shadows.",
+      "Quiet operational controls; theatrical weight reserved for countdown, winner, and the public board.",
+      "Big tabular numbers dominate; the 16:9 booth display is legible across a room.",
+      "White-label by construction: one editable accent re-themes the whole stage."
+    ],
+    "rules": [
+      { "name": "The Spotlight Rule", "body": "Coral marks at most one element per view — the single most important action, state, or result. Forbidden as decoration, as a wash on neutral content, or as a second emphasis competing with the first. Rarity is the meaning.", "section": "colors" },
+      { "name": "The No-Black Rule", "body": "Pure #000 is prohibited. All 'black' text and dark surfaces are Ink (#1F1B19) or Night (#181513).", "section": "colors" },
+      { "name": "The No-SaaS-Blue Rule", "body": "Generic SaaS blue is forbidden anywhere. There is one accent and it is coral.", "section": "colors" },
+      { "name": "The Mono-System Rule", "body": "Anything the machine says (timers, codes, status, labels, percentages) is JetBrains Mono, uppercase, 0.14em. Anything a person reads as a sentence is Inter. Anything that announces is Space Grotesk. Never blur the jobs.", "section": "typography" },
+      { "name": "The Tabular-Numerals Rule", "body": "Every timer, score, code, and leaderboard figure uses tabular-nums. Digits must not jitter as they tick.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Surfaces are flat at rest. The only elevation is state-driven (input focus ring, switch knob) or a full tonal shift to a dark stage. Reaching for a resting drop shadow on a card is off-system — use a hairline border or the next rung of the paper ladder.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do reserve Spotlight Coral for the single most important element on a view. Everything else lives in ink, grey, and cream.",
+      "Do build depth from the tonal paper ladder (cream to paper to paper-edge) and charcoal hairlines, not drop shadows.",
+      "Do set all system text (timers, codes, labels, status) in JetBrains Mono, uppercase, 0.14em; use tabular-nums on every figure.",
+      "Do keep big numbers dominant on the 16:9 booth display and nothing critical below ~14px — it is read across a room.",
+      "Do collapse empty white-label brand fields cleanly (the lockup helper joins only non-empty parts) so the neutral default reads intentional.",
+      "Do animate entrances transform-only (riseIn translateY 12->0, popIn scale .94->1) on the cubic-bezier(.2,.7,.2,1) curve with ~70ms child stagger."
+    ],
+    "donts": [
+      "Don't use generic SaaS blue, the hero-metric template, or endless identical card grids (anti-reference: generic SaaS dashboard).",
+      "Don't gamify: no confetti, cartoon mascots, badges/XP, rainbow palettes, or bouncy/elastic motion (anti-reference: gamified consumer app).",
+      "Don't fall into Kahoot-style quiz cliches — saturated primary blocks, oversized emoji, playful-rounded everything (anti-reference: quiz-app cliches).",
+      "Don't go cold, dense, or clinical gray (anti-reference: austere enterprise tool). The restraint here is warm and editorial.",
+      "Don't use pure black (#000) — text and dark surfaces are Ink (#1F1B19) or Night (#181513).",
+      "Don't put a CSS transition on any selection-state background (active cell, selected pill/tab) — set them instantly.",
+      "Don't animate content in from opacity: 0 — entrances are transform-only so content is never invisible if a timeline is throttled.",
+      "Don't over-round: cards top out at 18px; reaching for 24/32px+ on a card is off-system.",
+      "Don't spread coral as a fill or second emphasis. One spotlight per view."
+    ]
+  }
+}
